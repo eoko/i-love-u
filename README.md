@@ -1,6 +1,6 @@
 # i-love-u
 
-![InLove](master/maquette.png?raw=true "in love")
+![InLove](maquette.png?raw=true "in love")
 
 ## Goals
 Create an amazing love button. When you click on it, it's just love for everyone!
