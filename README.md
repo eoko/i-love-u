@@ -1,5 +1,7 @@
 # i-love-u
 
+![InLove](maquette.png.jpg?raw=true "in love")
+
 ## Goals
 Create an amazing love button. When you click on it, it's just love for everyone!
 
@@ -34,10 +36,18 @@ people-love-count |-- http[GET] /api/loves?metaonly=true ->|----- count ------>|
                   
 love-click-error  |-- http[POST] /api/loves -------------->|-- exist --------->|
                   |<-- 412 { message : already exist } ----|<--- yes ----------|
+                  
+me-love-count     |-- http[GET] /api/me/i-am-in-love ----->|-- exist(ip) ----->|
+                  |<-- 200 --------------------------------|<--- yes ----------|
+                  
+me-love-count     |-- http[GET] /api/me/i-am-in-love ----->|-- exist(ip) ----->|
+                  |<-- 404 --------------------------------|<--- no  ----------|
 ```
 
 ## States
 
 The love button is full of surprises. It has 2 layers :
 - the button, where people spread love
+  - blue, you don't love anyone
+  - red, you can love or you already love
 - love count, where people know of much people love them
