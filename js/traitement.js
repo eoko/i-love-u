@@ -10,15 +10,12 @@ $(document).ready(function() {
 
 	//action au click du bouton
 	$("button").click( function() {
-
-		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving-hover.png\")"))
+		if($(this).css("background-image").indexOf("/img/loving-hover.png") > 0)
 		{
-			
-			$(this).css("background-image","url(../i-love-u/img/not-loving-hover.png)");
+			$(this).css("background-image","url(./img/not-loving-hover.png)");
 
 			$.getJSON('https://api.ipify.org?format=json', function(data){
     			loadFiles(data.ip);
-
 			});
 		}
 	});
@@ -26,26 +23,26 @@ $(document).ready(function() {
 	//evenement lorsque la souris passe sur le bouton
 	$("#btn").mouseenter( function() {
 
-		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving.png\")"))
+		if($(this).css("background-image").indexOf("/img/loving.png") > 0)
 		{
-			$(this).css("background-image","url(../i-love-u/img/loving-hover.png)");
+			$(this).css("background-image","url(./img/loving-hover.png)");
 		}
-		else if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/not-loving.png\")"))
+		else if($(this).css("background-image").indexOf("/img/not-loving.png") > 0)
 		{
-			$(this).css("background-image","url(../i-love-u/img/not-loving-hover.png)");
+			$(this).css("background-image","url(./img/not-loving-hover.png)");
 		}
 	})
 
 	//evenement lorsque la souris n'est plus sur le bouton
 	$("#btn").mouseleave( function() {
 
-		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving-hover.png\")"))
+		if($(this).css("background-image").indexOf("/img/loving-hover.png") > 0)
 		{
-			$(this).css("background-image","url(../i-love-u/img/loving.png)");
+			$(this).css("background-image","url(./img/loving.png)");
 		}
-		else if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/not-loving-hover.png\")"))
+		else if($(this).css("background-image").indexOf("/img/not-loving-hover.png") > 0)
 		{
-			$(this).css("background-image","url(../i-love-u/img/not-loving.png)");
+			$(this).css("background-image","url(./img/not-loving.png)");
 		}
 	})
 });
@@ -63,7 +60,7 @@ function isNewIp()
 		        if(elem == data.ip)
 		        {
 		        	alert("Sorry you've already sent your like");
-					$("button").css("background-image","url(../i-love-u/img/not-loving.png)");
+					$("button").css("background-image","url(./img/not-loving.png)");
 		        }
 		    });
 
@@ -75,5 +72,5 @@ function isNewIp()
 function loadFiles(ip)
 {	
 	//appel du fichier php chargé d'enregistrer l'ip
-    $(document).load('../i-love-u/traitement.php?ip='+ip);
+    $(document).load('./traitement.php?ip='+ip);
 }
