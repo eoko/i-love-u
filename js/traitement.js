@@ -1,36 +1,33 @@
 $(document).ready(function() {
 
-	var ip;
-
-    $.getJSON('https://api.ipify.org?format=json', function(data) {
-    	//alert(data.ip);
-    	ip = data.ip;
-
+	//affichage du nombre de like
+	$.get('lov_count.txt', function(data) {
+		
+		$("#p1").text("So far we've got : "+data+" like(s).");
 	});
 
-	//isNewIp();
 
-	//if is new then not clickable
-	if(isNewIp() == false)
-	{
-		alert("Sorry you've already sent your like");
-		$("button").css("background-image","url(../i-love-u/img/not-loving.png)");
-		$("button").prop('disabled', true);
-	}
+	$("button").prop('disabled', true);
 
-	$("input").val(ip);
+	isNewIp();
+
+	$("button").prop('disabled', false);
+
+	//action au click du bouton
 	$("button").click( function() {
 
 		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving-hover.png\")"))
 		{
-			//add the ip
-			//add one like
-			//change color
+			
 			$(this).css("background-image","url(../i-love-u/img/not-loving-hover.png)");
-			//$(this).prop('disabled', true);
+
+			$.getJSON('https://api.ipify.org?format=json', function(data){
+    			loadFiles(data.ip);
+			});
 		}
 	});
 
+	//evenement lorsque la souris passe sur le bouton
 	$("#btn").mouseenter( function() {
 
 		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving.png\")"))
@@ -43,6 +40,7 @@ $(document).ready(function() {
 		}
 	})
 
+	//evenement lorsque la souris n'est plus sur le bouton
 	$("#btn").mouseleave( function() {
 
 		if($(this).css("background-image") == ("url(\"http://127.0.0.1/test_eoko/i-love-u/img/loving-hover.png\")"))
@@ -58,14 +56,28 @@ $(document).ready(function() {
 
 function isNewIp()
 {
-	jQuery.get('ip_adresses.txt', function(data) {
-   		alert(data);
-   		//process text file line by line
-   		//$('#div').html(data.replace('n',''));
+	//récuperation de l'ip
+	$.getJSON('https://api.ipify.org?format=json', function(data) {
 
-   		if(ip == f)
-   		//	return false
-   			alerrt("there");
+		//vérification de la présence de l'ip dans le fichier
+		$.get('ip_adresses.txt', function(data1) {    
+		    var lines = data1.split(";");
+
+		   $.each(lines, function(n, elem) {
+		        if(elem == data.ip)
+		        {
+		        	alert("Sorry you've already sent your like");
+					$("button").css("background-image","url(../i-love-u/img/not-loving.png)");
+		        }
+		    });
+
+		});
+
 	});
-	return true;
+}
+
+function loadFiles(ip)
+{	
+	//appel du fichier php chargé d'enregistrer l'ip
+    $(document).load('../i-love-u/traitement.php?ip='+ip);
 }
