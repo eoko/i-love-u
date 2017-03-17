@@ -1,10 +1,5 @@
 $(document).ready(function() {
 
-	//affichage du nombre de like
-	$.get('lov_count.txt', function(data) {
-		
-		$("#p1").text("So far we've got : "+data+" like(s).");
-	});
 
 	//désactivation du boutton au chargement du boutton avant de vérifier l'ip
 	$("button").prop('disabled', true);
@@ -23,6 +18,7 @@ $(document).ready(function() {
 
 			$.getJSON('https://api.ipify.org?format=json', function(data){
     			loadFiles(data.ip);
+
 			});
 		}
 	});
@@ -80,4 +76,10 @@ function loadFiles(ip)
 {	
 	//appel du fichier php chargé d'enregistrer l'ip
     $(document).load('../i-love-u/traitement.php?ip='+ip);
+
+
+		$.get('lov_count.txt', function(data1) {
+		
+				$("#p1").text("So far we've got : "+data1+" like(s).");
+			});
 }

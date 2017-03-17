@@ -10,7 +10,6 @@
 		<div>
 			<p>Your Like counts,please press the like button.</p>
 			<button id = "btn" class = "button" type = "submit"/>
-			<p id = "p1"><p>
 		</div>
 	</body>
 </html>
