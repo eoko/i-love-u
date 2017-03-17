@@ -76,10 +76,4 @@ function loadFiles(ip)
 {	
 	//appel du fichier php chargé d'enregistrer l'ip
     $(document).load('../i-love-u/traitement.php?ip='+ip);
-
-
-		$.get('lov_count.txt', function(data1) {
-		
-				$("#p1").text("So far we've got : "+data1+" like(s).");
-			});
 }
