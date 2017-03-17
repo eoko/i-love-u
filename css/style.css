@@ -1,0 +1,19 @@
+body {
+    background-color: white;
+}
+
+.button {
+    border: none;
+    outline: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(../img/loving.png) no-repeat transparent;
+    height: 69px;
+    width: 69px;
+}
+
+
+p {
+  text-align: center;
+}
