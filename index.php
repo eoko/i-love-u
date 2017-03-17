@@ -8,14 +8,12 @@
 	</head>
 	<body>
 		<p>Your Like counts,please press the like button.</p>
-		<form method = "post" action = "index.php">
-			<button class = "button" type = "submit"/>
-		</form>
+		<button id = "btn" class = "button" type = "submit"/>
 		
-		<div>
+		<!-- <div>
 			<p>So far we got : </p>
 			<p>likes</p>
-		</div>
+		</div> -->
 
 	</body>
 </html>
