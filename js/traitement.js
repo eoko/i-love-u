@@ -6,7 +6,7 @@ $(document).ready(function() {
 		$("#p1").text("So far we've got : "+data+" like(s).");
 	});
 
-
+	//désactivation du boutton au chargement du boutton avant de vérifier l'ip
 	$("button").prop('disabled', true);
 
 	isNewIp();
