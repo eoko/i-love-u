@@ -1,0 +1,17 @@
+api_love_click:
+  path: /loves
+  defaults:
+    _controller: AppBundle:Api:add
+  methods: [ POST ]
+
+api_love_count:
+  path: /loves
+  defaults:
+    _controller: AppBundle:Api:count
+  methods: [ GET ]
+
+api_me_love:
+  path: /me/i-am-in-love
+  defaults:
+    _controller: AppBundle:Api:love
+  methods: [ GET ]

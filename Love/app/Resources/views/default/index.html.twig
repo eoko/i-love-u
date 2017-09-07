@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div id="banner" >
+    <h1>Yet another like button</h1>
+    <button type="button" name="like" id="like" class="unliked"><i class="fa fa-heart"></i></button>
+  </div>
+  <div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius nibh ut molestie gravida. Sed eu nulla feugiat, semper dui vel, fringilla urna. In at enim sollicitudin, consectetur diam ac, malesuada ante. Quisque vehicula eros libero, quis mattis purus sollicitudin id. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean id nibh sit amet dolor scelerisque gravida. Maecenas in nibh in eros gravida placerat eget ac ex. Pellentesque porta id nibh quis ultricies. Fusce sodales pulvinar ligula eu semper.
+    </p>
+    <p>
+      Proin mollis rhoncus tempus. Suspendisse gravida luctus nunc imperdiet viverra. Integer porta ullamcorper justo, sit amet dictum urna sagittis et. Duis pharetra mattis ipsum, sit amet elementum ipsum iaculis et. Pellentesque sed tempor mauris. Integer volutpat orci et lacus hendrerit rutrum. Proin commodo pulvinar arcu nec mollis. Curabitur viverra maximus semper. Mauris vitae nulla elit. Ut sapien arcu, scelerisque vitae eleifend vulputate, suscipit eu metus.
+    </p>
+    <p>
+      Mauris convallis luctus molestie. Phasellus ornare egestas malesuada. Morbi non lectus at dolor pulvinar rutrum bibendum sed sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed sed blandit risus. Vestibulum et nibh ac turpis gravida congue et id purus. Nullam feugiat posuere varius. Sed tempor dolor nulla, ac commodo ex semper id. Morbi scelerisque convallis risus, eget ornare velit consectetur id. Vivamus molestie erat est, sed aliquet sapien aliquet a.
+    </p>
+    <p>
+      Suspendisse potenti. Proin vitae dapibus orci. Sed id arcu ut libero mollis sagittis ac nec augue. Proin tempor turpis lectus, non malesuada lorem finibus vitae. Integer vel pretium justo. Aenean sit amet vehicula justo. Curabitur in nisi eros. Aliquam aliquam, enim sit amet dictum tincidunt, purus ante rhoncus tortor, in suscipit tortor lectus et risus. Aliquam ut ultricies lorem, ultricies tempus purus. Pellentesque vel felis euismod, porta orci at, iaculis ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam nec rhoncus mauris.
+    </p>
+  </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+  #like{
+    display: block;
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 50%;
+  }
+
+  #like>.fa{
+    color: white;
+  }
+  .unliked{
+    background-color: blue;
+  }
+  .liked{
+    background-color: red;
+  }
+</style>
+{% endblock %}
+{% block javascripts %}
+  {{ parent()}}
+  <script type="text/javascript">
+    var urlLike = "{{ path('api_love_click')}}",
+        urlCount = "{{ path('api_love_count')}}",
+        urlInLove =  "{{path('api_me_love')}}";
+  </script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        var $like = $('#like');
+
+        // Requete pour connaitre le nombre de likes
+        $.ajax({
+          url: urlCount,
+          method: 'GET',
+          success:  function( json_data, status){
+
+              console.log(typeof(JSON.parse(json_data)))
+            likeCount(json_data, $like);
+          }
+        })
+
+
+        // Evenement sur le click du like
+        $like.on('click', function(event){
+          $.ajax({
+            url: urlLike,
+            method: 'POST',
+            dataType: 'json',
+            statusCode: {
+              200: likeSucced($(this)),
+              412: likeFailed()
+            }
+          })
+        })
+      })
+
+      // Fonction si le like succes
+      function likeSucced(like){
+        like.removeClass('unliked');
+        like.addClass('liked');
+        console.log('success');
+      }
+      // Fonction si le like echoue car déjà liké
+      function likeFailed(){
+        alert('Vous ne pouvez pas like plusieurs fois !');
+      }
+
+      // Fonction pour afficher les nombres de likes
+      function likeCount(content, likeButton)
+      {
+        console.log(content[count])
+          likeButton.append('<div>' + content.count.toString() + '</div>');
+      }
+  </script>
+{% endblock %}
