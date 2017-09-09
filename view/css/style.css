@@ -1,0 +1,12 @@
+button{
+  background-color: blue;
+  border-radius: 15px;
+  padding: 5px;
+  color: white
+}
+.send{
+  background-color: red;
+  border-radius: 15px;
+  padding: 5px;
+  color: white
+}
