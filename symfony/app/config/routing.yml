@@ -1,0 +1,7 @@
+luv:
+    resource: "@LuvBundle/Controller"
+    prefix:   /api
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

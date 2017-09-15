@@ -1,0 +1,3 @@
+luv_homepage:
+    path:     /
+    defaults: { _controller: LuvBundle:Default:index }

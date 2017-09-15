@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    Déjà <span id="count"></span> preuves d'amour partagées !
+    <button id="luv-button" onClick="love()" class="luv">Luv</button>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+
+var button = document.getElementById('luv-button');
+var countEl = document.getElementById('count');
+var count = 0;
+
+fetch('http://localhost:8080/api/loves?metaonly=true')
+    .then(function(response) {
+        return response.text();
+    })
+    .then(text => {
+        count = text;
+        refreshCount();
+    })
+    .catch(console.error)
+
+function refreshCount() {
+    countEl.innerHTML = count;
+}
+
+function love() {
+    fetch('http://localhost:8080/api/loves')
+        .then(function(response) {
+            if(response.status === 200) {
+                //button coloré en rouge
+                console.log('ok');
+                button.style.backgroundColor = "red";
+            }
+            else if(response.status === 412) {
+                console.log('ok but not ok');
+                //Blue!
+                button.style.backgroundColor = "blue";
+            }
+        })
+        .catch(console.error);
+}
+
+</script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
